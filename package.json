@@ -31,13 +31,15 @@
     "type": "git",
     "url": "git+https://github.com/thepranaygupta/react-tailwind-css-starter-pack.git"
   },
-  "author": "Pranay Gupta",
+  "author": "Bhavishya Sachdeva",
   "bugs": {
     "url": "https://github.com/thepranaygupta/react-tailwind-css-starter-pack/issues"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm run react-start\" \"npm run server-start\"",
+    "react-start": "react-scripts start",
     "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cd server && npm run dev",
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
