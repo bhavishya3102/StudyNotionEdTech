@@ -1,17 +1,20 @@
 {
   "name": "mega-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "studynotion-backend",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "studynotion-backend"
+  ],
+  "author": "Bhavishya Sachdeva",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cloudinary": "^1.40.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
