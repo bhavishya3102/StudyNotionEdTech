@@ -26,7 +26,7 @@ app.use(cookieParser());
 // cors middleware when we use backend with different port no and frontend with different port no
 app.use(
     cors({
-        origin:["http://localhost:3000"],
+        origin:["http://localhost:3000","https://study-notion-ed-tech-tau.vercel.app/"],
         credentials:true,
     })
 )
