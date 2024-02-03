@@ -62,7 +62,7 @@ export async function getUserEnrolledCourses(token) {
 
 
   export async function getInstructorData(token){
-    const toastid=toast.loading("Loading.....")
+  
     let result=[];
     try{
       const resp=await apiconnector("GET",GET_INSTRUCTOR_DASHBOARD,null,{
@@ -77,6 +77,6 @@ export async function getUserEnrolledCourses(token) {
       console.log(error);
       toast.error("Could not Get Instructor Data")
     }
-    toast.dismiss(toastid)
+
     return result;
   }
