@@ -9,18 +9,19 @@ const EnrolledCourses = () => {
   const { token } = useSelector((state) => state.auth);
   const navigate=useNavigate();
 
-
-  useEffect(() => {
-    async function getenrolledcourses() {
-      try {
-        const response = await getUserEnrolledCourses(token);
-       const filterresp=response.filter((ele)=>ele.status!=="Draft")
-  console.log(filterresp)
-        setenrollcourse(filterresp);
-      } catch (error) {
-        throw new Error("error");
-      }
+  async function getenrolledcourses() {
+    try {
+      const response = await getUserEnrolledCourses(token);
+     const filterresp=response.filter((ele)=>ele.status!=="Draft")
+console.log(filterresp)
+      setenrollcourse(filterresp);
+      console.log("bhavi")
+    } catch (error) {
+      throw new Error("error");
     }
+  }
+  useEffect(() => {
+
   getenrolledcourses();
   }, [])
 
@@ -28,7 +29,7 @@ const EnrolledCourses = () => {
   return (
     <div className="text-white">
       {!enrollcourse ? (
-        <div>Loading...</div>
+        <div></div>
       ) : enrollcourse.length > 0 ? (
         <div>
         <h1 className="text-lg font-bold">Enrolled Courses</h1>
