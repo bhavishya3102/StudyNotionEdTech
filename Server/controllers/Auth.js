@@ -5,7 +5,7 @@ const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const Profile=require("../models/Profile");
 const mailsender=require("../utils/mailSender");
-const { passwordUpdated } = require("../Mail/Templates/passwordUpdate");
+const  passwordUpdated  = require("../Mail/Templates/passwordUpdate");
 
 require("dotenv").config();
 // send otp
@@ -16,6 +16,11 @@ try{
         const {email}=req.body;
 
         // check user is already exists
+
+        /**The findOne() method finds and returns one document that matches the given
+         *  selection criteria. If multiple documents satisfy the given query expression,
+         *  then this method will return the first document according to the natural order
+         * */
         const checkuser=await user.findOne({email:email});
         //to be used in case of signup
     
@@ -35,7 +40,10 @@ try{
         });
     
         // check unique otp or not
-        const result=await OTP.findOne({otp:otp});
+        
+      // This mechanism seems to ensure that each OTP used is unique within the context of the database.
+        
+      const result=await OTP.findOne({otp:otp});
         console.log("OTP", otp);
 		console.log("Result", result);
         while(result){
@@ -89,7 +97,6 @@ exports.signup=async (req,resp)=>{
         message:"required details missing"
       })
     }
-    console.log("a");
     
     // password match confirm and password
   if(password !==confirmpassword){
@@ -98,7 +105,6 @@ exports.signup=async (req,resp)=>{
         message:"password not match with confirm password"
     })
   }
-  console.log("b");
   // check user already exists or not
   const checkemail=await user.findOne({email});
   if(checkemail){
@@ -107,10 +113,10 @@ exports.signup=async (req,resp)=>{
         message:"user is already exists"
     })
   }
+
+  // verify the otp if it is correct or not given by the user
   // find most recent otp stored for the user in the otp database
-  console.log("c");
   const recentotp=await OTP.find({email:email}).sort({createdate:-1}).limit(1);
-  console.log("d");
   console.log(recentotp);
   // validate otp
   if(recentotp.length==0){
@@ -118,7 +124,6 @@ exports.signup=async (req,resp)=>{
       success:false,
       message:"Otp not found"
     })
-    console.log("f");
   }else if(otp !==recentotp[0].otp)
   {
     return resp.status(402).json({
@@ -126,8 +131,7 @@ exports.signup=async (req,resp)=>{
       message:"Invalid otp"
     })
   }
-  
-  console.log("g");
+  //else  it means otp is correct
   // hash password
   
   const hashpassword=await bcrypt.hash(password,10);
@@ -135,7 +139,7 @@ exports.signup=async (req,resp)=>{
 
       // Create the user
       let approved = ""
-      approved === "Instructor" ? (approved = false) : (approved = true)
+      accounttype === "Instructor" ? (approved = true) : (approved = false)
 
   // create entry in the database
   
@@ -145,7 +149,6 @@ exports.signup=async (req,resp)=>{
     about:null,
     contactno:null
   });
-  console.log("h");
   
   const userdata=await user.create({
     firstname,lastname,email,password:hashpassword,accounttype,approved:approved,
@@ -153,7 +156,6 @@ exports.signup=async (req,resp)=>{
     image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstname} ${lastname}`
   })
   console.log("user:"+userdata._id);
-  console.log("e");
   // return response
   return resp.status(200).json({
     success:true,
@@ -170,7 +172,7 @@ catch(error){
 }   
 }
 
-// Login
+ // Login
 exports.login=async (req,resp)=>{
   try{
 // get data from the request body
@@ -199,6 +201,12 @@ if(await bcrypt.compare(password,checkuser.password)){
     accounttype:checkuser.accounttype
   }
 
+//Payload- The payload typically contains
+// information about the user or any other data you want to encode in the token
+
+//JwtSecret- The second argument is the secret key used to sign the token
+// sign method is used to generate the token
+
   const token=jwt.sign(payload,process.env.JWT_SECRET,{
   expiresIn:"24h"
   });
@@ -206,10 +214,31 @@ if(await bcrypt.compare(password,checkuser.password)){
   checkuser.token=token;
   checkuser.password=undefined; // for privacy purpose
 // create cookie and send response
+
+
+
+/**Date.now() returns the current timestamp in milliseconds.
+3 * 24 * 60 * 60 * 1000 calculates the total milliseconds for 3 days.
+ (3 days * 24 hours/day * 60 minutes/hour * 60 seconds/minute * 1000 milliseconds/second) 
+ 
+ 
+
+  When httpsOnly is set to true, it means that the browser will only send the
+   cookie over HTTPS connections, not over unsecured HTTP connections. 
+   This is a security measure to protect sensitive information (like session tokens) 
+   from being intercepted in transit.
+ 
+ */
 const options={
 expires:new Date(Date.now()+3*24*60*60*1000),
 httpsOnly:true
 }
+
+
+/** this code sets an HTTP cookie named "token" in the server's response.
+ * The cookie contains the value of the JWT (token) and is configured with 
+ * certain options such as an expiration date and the requirement for it to be
+ *  sent only over HTTPS */
 
 resp.cookie("token",token,options).status(200).json({
 success:true,

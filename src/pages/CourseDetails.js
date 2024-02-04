@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { BuyCourse } from "../services/operations/studentFeaturesApi";
-import { getFullDetailsOfCourse } from "../services/operations/courseDetailsAPI";
+import { getFullCourseInformation } from "../services/operations/courseDetailsAPI";
 import GetAvgRating from "../utils/avgRating";
 import Confirmation from "../Components/Common/Confirmation";
 import RatingStars from "../Components/Common/RatingStars";
@@ -61,7 +61,7 @@ setisActive(!isActive.includes(id)
   useEffect(() => {
     async function fetchdata() {
       try {
-        const resp = await getFullDetailsOfCourse(courseid, token);
+        const resp = await getFullCourseInformation(courseid);
         console.log(resp);
         setcoursedata(resp);
       } catch (error) {

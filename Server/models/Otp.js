@@ -33,7 +33,12 @@ throw error;
     }
 }
 
-
+/**this code is a pre-save middleware for a schema called Otpschema.
+ *  It triggers before saving a document, 
+ * and its main purpose is to send a verification, likely an OTP, 
+ * using the email and OTP values present in the document being saved.
+ *  Once the verification is sent, it proceeds to the next middleware or
+ *  the save operation. */
 Otpschema.pre("save",async function(next){
     await sendverification(this.email,this.otp);
     next();

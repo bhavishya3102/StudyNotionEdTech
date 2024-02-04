@@ -34,6 +34,7 @@ export const courses={
     GET_ALL_INSTRUCTOR_COURSES_API:BASE_URL+"/course/getInstructorCourses",
     DELETE_COURSE_API:BASE_URL+"/course/deletecourse",
     GET_FULL_COURSE_DETAILS_AUTHENTICATED:BASE_URL+"/course/getCourseDetails",
+    GET_COURSE_INFORMATION:BASE_URL+"/course/getCourseInformation",
     GET_USER_ENROLLED_COURSES_API:BASE_URL+"/profile/getEnrolledCourses",
     GET_INSTRUCTOR_DASHBOARD:BASE_URL+"/profile/instructordashboard",
     CREATE_RATING_API:BASE_URL+"/course/createRating",

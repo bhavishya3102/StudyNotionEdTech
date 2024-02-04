@@ -16,6 +16,9 @@ console.log(course);
   return (
     <div className="flex flex-col gap-3">
       <Link to={`/course/${course._id}`}>
+      {
+        console.log(course._id)
+      }
         <div>
           <div className="flex flex-row relative">
             <img

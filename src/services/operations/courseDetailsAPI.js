@@ -5,7 +5,7 @@ import {toast} from 'react-toastify';
 const {GETALLCATEGORIES,CREATECOURSE,EDITCOURSE,CREATE_SECTION_API,UPDATE_SECTION_API,
 DELETE_SECTION_API,DELETE_SUBSECTION_API,CREATE_SUBSECTION_API,UPDATE_SUBSECTION_API,GET_ALL_INSTRUCTOR_COURSES_API,
 DELETE_COURSE_API,GET_FULL_COURSE_DETAILS_AUTHENTICATED
-,CREATE_RATING_API,LECTURE_COMPLETION_API,GET_REVIEWS}=courses;
+,CREATE_RATING_API,LECTURE_COMPLETION_API,GET_REVIEWS,GET_COURSE_INFORMATION}=courses;
 export const getallcategory=async()=>{
     let result=[];
     try{
@@ -284,6 +284,38 @@ export const getFullDetailsOfCourse = async (courseid, token) => {
   //   dispatch(setLoading(false));
   return result
 }
+
+
+// get full details of a course
+export const getFullCourseInformation = async (courseid) => {
+  const toastId = toast.loading("Loading...")
+  //   dispatch(setLoading(true));
+  let result = null
+  try {
+    const response = await apiconnector(
+      "POST",GET_COURSE_INFORMATION,
+      
+      {
+        courseid,
+      }
+    )
+    console.log("COURSE_FULL_DETAILS_API API RESPONSE............", response)
+
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+    result = response?.data?.data
+    console.log(result)
+  } catch (error) {
+    console.log("COURSE_FULL_DETAILS_API API ERROR............", error)
+  
+    // toast.error(error.response.data.message);
+  }
+  toast.dismiss(toastId)
+  //   dispatch(setLoading(false));
+  return result
+}
+
 
 // create a rating for course
 export const createRating = async (data, token) => {

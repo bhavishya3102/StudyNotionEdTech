@@ -2,7 +2,7 @@ const express=require("express");
 const router=express.Router();
 
 // course controller import
-const {createCourse,deleteCourse,editCourse, showallcourses ,getcoursedetails,getInstructorCourses}=require("../controllers/Course");
+const {createCourse,deleteCourse,editCourse, showallcourses ,getcoursedetails,getInstructorCourses,courseinformation}=require("../controllers/Course");
 
 //categories controller import
 const {createCategory ,getallcategory ,categorypagedetails}=require("../controllers/Category");
@@ -36,6 +36,7 @@ router.post("/updateSubSection",auth,isInstructor,updatesubsection);
 router.post("/deleteSubSection",auth,isInstructor,deletesubsection);
 router.get("/getAllCourses",auth,showallcourses);
 router.post("/getCourseDetails",auth,getcoursedetails);
+router.post("/getCourseInformation",courseinformation);
 router.post("/updatecourseprogress",auth,isStudent,updateCourseProgress);
 
 

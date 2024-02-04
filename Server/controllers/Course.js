@@ -126,6 +126,74 @@ status:true});
  }
 }
 
+exports.courseinformation=async(req,resp)=>{
+    try{
+        // get course id
+        const {courseid}=req.body;
+        console.log(courseid)
+        // validate
+        if(!courseid){
+        
+            return resp.json({
+                success:false,
+                message:"course id is missing"
+            })
+        }
+        // find details of course
+        const coursedetail=await Course.findOne({_id:courseid})
+                                    .populate({
+                                        path:"instructor",
+                                        populate:{
+                                            path:"additionaldetails"
+                                        },
+                                    })
+                                    .populate("ratingandreviews")
+                                    .populate("Category")
+                                    .populate({
+                                        path:"coursecontent",
+                                        populate:{
+                                            path:"subsection"
+                                        }
+                                    })
+                                  
+                                    .exec();
+        
+        
+     
+        
+       
+        
+        
+             let totalDurationInSeconds=0;
+             coursedetail.coursecontent.forEach((content)=>{
+                content.subsection.forEach((subsection)=>{
+                  const timedurationInseconds=parseInt(subsection.timeDuration)
+                  totalDurationInSeconds+=timedurationInseconds  
+                })
+             })                       
+        const totalDuration=convertSecondsToDuration(totalDurationInSeconds);
+
+        console.log(totalDuration)
+        
+        // return response
+        return resp.status(200).json({
+            success:true,
+            message:"course details fetched successfully",
+            data:{
+                coursedetail,
+                totalDuration,
+               
+            }
+        })
+        }catch(error){
+            return resp.status(500).json({
+                success:false,
+                message:"error in fetching course details"
+            })  
+        
+            } 
+}
+
 
 // getcourse details
 exports.getcoursedetails=async(req,resp)=>{
