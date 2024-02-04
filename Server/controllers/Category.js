@@ -56,7 +56,6 @@ resp.status(200).json({
 exports.categorypagedetails=async(req,resp)=>{
     try{
 // find category id 
-console.log("bbbbb");
 const {categoryid}=req.body;
 // find all the courses of specific category
 const specificcategory=await Category.findById(categoryid)
@@ -122,7 +121,7 @@ const allcategories=await Category.find().populate({
 const allcourses=allcategories.flatMap((category)=>category.course)
 console.log("allcourses",allcourses);
 
-const mostSellingCourses=allcourses.sort((a,b)=>b.sold-a.sold)
+const mostSellingCourses=allcourses.sort((a,b)=>b.studentEnrolled.length-a.studentEnrolled.length)
 .slice(0,10)
 
 
