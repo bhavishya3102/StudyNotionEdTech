@@ -5,6 +5,19 @@ exports.auth=async (req,resp,next)=>{
     console.log("a");
     try{
         // fetch the token from the req body
+
+        /**Pass the Authorization header
+         * Bearer   "token": 
+         * "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJoYXZ
+         * pc2FjaGRldmEzMTBAZ21haWwuY29tIiwiaWQiOiI2NWI3NzE5NjUzNGMxNDQxMDF
+         * lNjU4NDciLCJhY2NvdW50dHlwZSI6IkFkbWluIiwiaWF0IjoxNzA2NTIxMDE1LCJleHA
+         * iOjE3MDY2MDc0MTV9.BKVTvsqzA5B1u2Pse_NH0uthQS
+         * 34vtPPeWFVHvGoQZ8"
+         * 
+         * In this replace function Bearer with space is replaced with "" so that we access 
+         * the token**/
+
+
         const token=req.body.token || req.cookies.token || req.header("Authorisation").replace("Bearer ","");
         console.log(token);
         // if token is missing then return the response

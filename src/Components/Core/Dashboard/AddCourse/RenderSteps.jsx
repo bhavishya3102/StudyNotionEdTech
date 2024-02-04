@@ -29,7 +29,7 @@ const RenderSteps = () => {
          return  <div  key={index} className="h-[30px] w-full  text-white">
           <div   className="flex flex-col items-center ">
             <button
-              className={`grid cursor-default aspect-square w-[29px] place-items-center rounded-full border-[1px]  ${
+              className={`grid cursor-default aspect-square w-[28px] place-items-center rounded-full border-[1px]  ${
                 step === item.id
                   ? "border-yellow-50 bg-yellow-900 text-yellow-50"
                   : "border-richblack-700 bg-richblack-800 text-richblack-300"

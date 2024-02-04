@@ -15,7 +15,7 @@ const PublishCourse = () => {
 
 useEffect(() => {
 if(course?.status===COURSE_STATUS.PUBLISHED){
-    setValue("publish",true);
+    setValue("public",true);
 }
 }, [])
 
