@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Course = require("../models/Course");
 const Courseprogress = require("../models/Courseprogress");
 const Profile=require("../models/Profile");
@@ -68,9 +69,27 @@ if(!user){
     })
 }
 // delete profile from user schema
-await Profile.findByIdAndDelete(user.additionaldetails);
+await Profile.findByIdAndDelete({
+    _id:new mongoose.Types.ObjectId(user.additionaldetails)
+});
+
+//delete user from asssociated courses
+for(const courseid of user.courses){
+    await Course.findByIdAndUpdate(courseid,
+        {  $pull:{studentEnrolled:userid}},
+        {new:true}
+        )
+}
 // delete user
 await User.findByIdAndDelete(userid);
+
+
+// automatically delete courses(property of User Model) in which store the course id(reference) 
+//of enrolled courses..
+
+// Note-- when we delete any user any course then make sure the other models associated with (delete )user or course
+// will we update ,it is the responsibility of programmer ..  
+
 // return response
 return resp.status(200).json({
     success:true,

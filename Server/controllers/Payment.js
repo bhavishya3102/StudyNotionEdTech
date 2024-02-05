@@ -7,7 +7,6 @@ const { response } = require("express");
 const crypto = require("crypto")
 const { mongo, default: mongoose } = require("mongoose");
 const { paymentSuccessEmail } = require("../Mail/Templates/paymentSuccessEmail");
-const CourseProgress=require("../models/Courseprogress");
 const Courseprogress = require("../models/Courseprogress");
 // capture the payment and initiate the razorpay
 exports.capturepayment=async (req,resp)=>{
@@ -184,6 +183,13 @@ const enrollStudents=async(courses,userid,resp)=>{
             message:"please provide details"
         })
     }
+
+/**findOneAndUpdate--> The first document that matches the query will be updated.
+ * 
+ * findByIdandUpdate--> provide the _id of the document
+ *  you want to update, and it will find and update that specific document.
+ */
+
      for(const courseid of courses){
         try{
             // find the  course and enroll the students

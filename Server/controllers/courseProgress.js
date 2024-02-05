@@ -48,6 +48,7 @@ exports.updateCourseProgress=async (req,resp)=>{
             courseProgress.completedvideos.push(subsectionid)
         }
 
+        // when we add the subsection id in completed videos array
         // save and update course progress
         await courseProgress.save()
 
