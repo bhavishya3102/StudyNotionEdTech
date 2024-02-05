@@ -34,7 +34,7 @@ console.log(filterresp)
         <div>
         <h1 className="text-lg font-bold">Enrolled Courses</h1>
 
-          <div className="flex flex-row rounded-t-lg bg-richblack-500 justify-between">
+          <div className="flex flex-row rounded-t-lg bg-richblack-500 justify-between  pl-[20vw]">
           <p className="w-[45%] px-5 py-3">Course Name</p>
           <p className="w-1/4 px-2 py-3">Duration</p>
           <p className="flex-1 px-2 py-3">Progress</p>
@@ -55,7 +55,7 @@ console.log(filterresp)
                   </div> 
 
                   <div>
-                    <p>{elem.duration}</p>
+                    <p className="">{elem.timeDuration}</p>
                  
                   </div>
 

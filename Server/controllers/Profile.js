@@ -191,6 +191,10 @@ if(!userdetails){
 // formula is (completevideos/totalvideos)*100
 
 
+  
+//  user.toObject() is used to transform the Mongoose document into a plain JavaScript object.
+//Uses toObject to convert the Mongoose document (userdetails) to a plain JavaScript object.
+
 // console.log("vv",userdetails)
 userdetails=userdetails.toObject();
 var subsectionLength=0;
@@ -203,37 +207,34 @@ for(var i=0;i<userdetails.courses.length;i++){
         totalDurationInSeconds+=userdetails.courses[i].coursecontent[j].subsection
         .reduce((acc,curr)=> acc+parseInt(curr.timeDuration),0)
         console.log("total",totalDurationInSeconds)
-// set the time duration in duration 
+        // set the time duration in duration 
         userdetails.courses[i].timeDuration=convertSecondsToDuration(totalDurationInSeconds)
-/// calculate subsection length
+        /// calculate subsection length
         subsectionLength+=userdetails.courses[i].coursecontent[j].subsection.length;
-console.log("subsec length",subsectionLength)
-
+        console.log("subsec length",subsectionLength)
+        
     }
-let courseprogresscount=await Courseprogress.findOne({
-    userid:userid,
-    courseid:userdetails.courses[i]._id
-})
-
-// find the length of complete videos
-courseprogresscount=courseprogresscount.completedvideos.length;
-console.log("course prog",courseprogresscount)
-if(subsectionLength==0){
-    userdetails.courses[i].progressPercentage=100
-}
-else{
-    // to make it upto 2 decimal point
-    const multiplier=Math.pow(10,2)
-    userdetails.courses[i].progressPercentage=Math.round(
-        (courseprogresscount/subsectionLength)*100*multiplier)/multiplier
-
+    let courseprogresscount=await Courseprogress.findOne({
+        userid:userid,
+        courseid:userdetails.courses[i]._id
+    })
     
-
-
-}
-
-}
-
+    // find the length of complete videos
+    courseprogresscount=courseprogresscount.completedvideos.length;
+    console.log("course prog",courseprogresscount)
+    if(subsectionLength==0){
+        userdetails.courses[i].progressPercentage=100
+    }
+    else{
+        // to make it upto 2 decimal point
+        const multiplier=Math.pow(10,2)
+        userdetails.courses[i].progressPercentage=Math.round(
+            (courseprogresscount/subsectionLength)*100*multiplier)/multiplier
+        }
+        
+    }
+    
+    // user details ke andar courses ke andar timeDuration and progressPercentage add hoga
 if(!userdetails){
     return resp.status(400).json({
         success: false,
@@ -258,6 +259,8 @@ message:"get the enrolled courses"
 exports.instructorDashboard=async (req,resp)=>{
     try{
         // this stores the all course created by  Instructor
+        // 1 user create many course and this all courses have same user id so we access this
+        
        const courseDetails=await Course.find({instructor:req.user.id})
 
        // this stores the array of object ,object stores
