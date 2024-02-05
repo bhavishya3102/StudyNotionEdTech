@@ -2,10 +2,12 @@ const User=require("../models/User");
 const ConfirmationEmail=require("../Mail/Templates/ConfirmationEmail");
 const mailsender=require("../utils/mailSender");
 
-// send confirmation mail to the enrolled student
+// send mail for contact us 
+// pending
 exports.mailtoenrollstudent=async(req,resp)=>{
     try{
     // get userid
+    // const {userid}=req.user.id
 
     // fetch the details from userid
     const userdetails=await User.find({_id:req.user.id});

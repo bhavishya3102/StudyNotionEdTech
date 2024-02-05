@@ -75,7 +75,7 @@ const newCourse=await Course.create({
 })
 console.log("new course",newCourse);
 
-// add the new course to the user schema
+// add the new course to the user schema- create the new course 
 await User.findByIdAndUpdate({_id:Instructordetails._id},
     { $push:{ courses:newCourse._id } },
     { new:true  });
@@ -162,7 +162,10 @@ exports.courseinformation=async(req,resp)=>{
      
         
        
-        
+   /***
+    * let decimalNumber = parseInt("123");  // Parses "123" as a decimal (base 10) number
+    console.log(decimalNumber);  // Output: 123
+    *  */     
         
              let totalDurationInSeconds=0;
              coursedetail.coursecontent.forEach((content)=>{
@@ -230,7 +233,8 @@ const coursedetail=await Course.findOne({_id:courseid})
                           
                             .exec();
 
-
+// at the time of payment when the student enrolled course then create the entry in the 
+// courseProgress model so that we get this entry 
                           
 let courseprogresscount=await Courseprogress.findOne({
     courseid:courseid,
@@ -286,6 +290,8 @@ exports.editCourse=async (req,resp)=>{
         })
     }
     if(req.files){
+        // agar req.files edit hue h to uske file me se thumbnail nikalkar update kardo 
+        // cloudinary me
         const thumbnail=req.files.thumbnail;
         const thumbnailImage=await uploadImageToCloudinary(
             thumbnail,
@@ -295,6 +301,16 @@ exports.editCourse=async (req,resp)=>{
     }
 
     // update only the fields that are present in the request
+
+    /**const car = {
+  make: 'Toyota',
+  model: 'Camry',
+  year: 2022
+};
+
+console.log(car.hasOwnProperty('make'));  // Output: true
+console.log(car.hasOwnProperty('color')); // Output: false
+ */
     for(const key in updates){
         if(updates.hasOwnProperty(key)){
             if(key==="tag"|| key==="instructions"){
@@ -306,6 +322,7 @@ exports.editCourse=async (req,resp)=>{
         }
     }
     await course.save();
+
 const updatecourse=await Course.findOne({
     _id:courseid,
 
@@ -409,6 +426,9 @@ exports.deleteCourse=async (req,resp)=>{
             await Section.findByIdAndDelete(sectionid)
             
         }
+//  in course the value of category is object type it contains category id of course 
+// while deleting the course it delete the the object
+
         // delete the course
         await Course.findByIdAndDelete(courseid);
         return resp.status(200).json({

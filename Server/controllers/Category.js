@@ -121,6 +121,11 @@ const allcategories=await Category.find().populate({
 const allcourses=allcategories.flatMap((category)=>category.course)
 console.log("allcourses",allcourses);
 
+
+//The comparison function (a, b) => b.studentsEnrolled.length - a.studentsEnrolled.length 
+//takes two course objects (a and b) 
+//and compares them based on their sold property in descending order.
+
 const mostSellingCourses=allcourses.sort((a,b)=>b.studentEnrolled.length-a.studentEnrolled.length)
 .slice(0,10)
 
