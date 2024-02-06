@@ -26,6 +26,7 @@ import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./Components/Core/ViewCourse/VideoDetails";
 import Purchasehistory from "./Components/Core/Dashboard/Purchasehistory";
 import Instructor from "./Components/Core/Dashboard/InstructorDashboard/Instructor";
+import OpenRoute from "./Components/Core/Auth/OpenRoute";
 
 function App() {
   const {user}=useSelector((state)=>state.profile);
@@ -37,13 +38,13 @@ function App() {
 <Routes>
 <Route path="/" element={<Home />}></Route>
 <Route path="/about" element={<About />}></Route>
-<Route path="/signup" element={<Signup />}></Route>
-<Route path="/login" element={<Login />}></Route>
+<Route path="/signup" element={<OpenRoute><Signup /></OpenRoute>}></Route>
+<Route path="/login" element={<OpenRoute><Login /></OpenRoute>}></Route>
 <Route path="/catalog/:catalogname" element={<Catalog />}></Route>
 <Route path="/course/:courseid" element={<CourseDetails/>}></Route>
-<Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-<Route path="/update-password/:id" element={<UpdatePassword />}></Route>
-<Route path="/verify-email" element={<VerifyEmail />}></Route>
+<Route path="/forgotpassword" element={<OpenRoute><ForgotPassword /></OpenRoute>}></Route>
+<Route path="/update-password/:id" element={<OpenRoute><UpdatePassword /></OpenRoute>}></Route>
+<Route path="/verify-email" element={<OpenRoute><VerifyEmail /></OpenRoute>}></Route>
 <Route path="/contact" element={<Contactus />}></Route>
 
 <Route element={<PrivateRoute><Dashboard/></PrivateRoute>}>

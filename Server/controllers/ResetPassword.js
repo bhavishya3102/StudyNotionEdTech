@@ -4,6 +4,10 @@ const bcrypt=require("bcrypt");
 const crypto=require("crypto");
 
 // Reset Password token
+
+//forget password button in login helps to reset the password 
+// in setting bar new passord and confirm pasword tab is given to change the passsword
+
 exports.resetPasswordtoken=async (req,resp)=>{
     try{
         

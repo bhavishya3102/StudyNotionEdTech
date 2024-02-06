@@ -88,6 +88,13 @@ exports.averagerating=async(req,resp)=>{
 const courseid=req.body;
 
 // find average rating
+
+/**
+ * The $match stage filters documents based on given courseid          -1stage
+ * The $group stage groups the filtered documents.                  --2stage
+ * The $avg operator is used to calculate the average of the rating field for all the grouped documents.
+ * The result array will contain a single document
+ */
 const result=await RatingandReview.aggregate([
     {
         $match:{
@@ -125,6 +132,9 @@ return resp.status(402).json({
 }
 
 // get all rating and reviews
+
+
+// when we populate course field in Rating and Review model then show(select) only course name 
 exports.allratingreviews=async(req,resp)=>{
     try{
 // find all rating and  reviews

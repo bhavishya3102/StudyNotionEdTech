@@ -32,6 +32,15 @@ app.use(
 )
 
 // file upload middleware
+
+/**   useTempFiles:true   ----This option indicates that the uploaded files should be stored as temporary files
+ *  on the server before they are moved or processed further. When set to true, the 
+ * uploaded files will be available on the req.files */
+
+/** tempFileDir:"/tmp" ----This option specifies the directory where the temporary files should be stored. 
+ * In this case, it is set to "/tmp", which is a commonly used directory path for storing 
+ * temporary files  */
+
 app.use(
     fileupload({
         useTempFiles:true,
