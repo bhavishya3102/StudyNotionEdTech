@@ -62,6 +62,9 @@ export const updateprofile=(formdata,token)=>{
     } 
     }
 
+    // in frontend the password is not shown in the client side so when change password then no need to update
+    // the user state in slice
+
     export const changepassword=(formdata,token)=>{
         return async(dispatch)=>{
    

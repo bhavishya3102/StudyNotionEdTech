@@ -13,6 +13,24 @@ const Loginform = () => {
   const dispatch=useDispatch();
   const navigation=useNavigate();
 
+
+  /**return { ...prev, [name]: value }: This line returns a new object
+   *  that represents the updated state of the form data. It uses the spread operator
+   *  (...prev) to copy all properties from the previous state object (prev). Then, it
+   *  updates the property specified by the name variable with the new value. The square 
+   * brackets around [name] are used for dynamic property names in JavaScript object 
+   * literals. */
+
+
+  /**const propertyName = 'example';
+const obj = {
+  [propertyName]: 'dynamic value'
+};
+
+console.log(obj); // Output: { example: 'dynamic value' }
+
+*/
+
   function changehandler(event){
     const {name,value}=event.target;
 

@@ -90,6 +90,8 @@ const options={
         
     };
     console.log("a")
+
+    // Show the razorpay payment window
     const paymentObject=new window.Razorpay(options);
     paymentObject.open();
 

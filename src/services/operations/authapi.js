@@ -6,21 +6,23 @@ import {resetcart} from "../../Slices/Cartslice"
 import {toast} from 'react-toastify';
 import { setblur } from "../../Slices/Blur";
 
+
+/** "useDispatch" cannot be called at the top level. React
+ *  Hooks must be called in a React function component or a custom React Hook function */
+
+// const dispatch=useDispatch();
+
 const {RESETPASSWORDTOKEN_API,RESETPASSWORD_API,SENDOTP_API,SIGNUP_API,LOGIN_API}=auth;
 
 export const signup=(firstname,lastname,email,password,confirmpassword,accounttype,otp,navigation)=>{
         return async(dispatch)=>{
             dispatch(setloading(true));
-            console.log("a");
             try{
-                console.log("d");
                 console.log(firstname);
                 console.log(otp);
                 
                 const resp=await apiconnector("POST",SIGNUP_API , {firstname,lastname,email,password,confirmpassword,accounttype,otp});
-                console.log("b");
                 console.log(resp);
-                console.log("c");
             if(!resp.data.success){
             throw new Error(resp.data.message);
             
@@ -145,10 +147,7 @@ toast.error("fail to reset password");
 export const logout=(navigate)=>{
     return async(dispatch)=>{
         dispatch(settoken(null));
-        console.log("a");
         dispatch(setuser(null));
-        console.log("b");
-        console.log("c");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         dispatch(setblur(false));
