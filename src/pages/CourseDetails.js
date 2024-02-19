@@ -73,10 +73,11 @@ setisActive(!isActive.includes(id)
 
   console.log(coursedata);
   useEffect(() => {
-    const count = GetAvgRating(coursedata?.ratingandreviews);
+    const count = GetAvgRating(coursedata?.coursedetail?.ratingandreviews);
+    console.log(count)
     setavgReviewCount(count);
   }, []);
-
+console.log(avgReviewCount)
   if (!coursedata) {
     return (
       <div>

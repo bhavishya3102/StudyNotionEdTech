@@ -11,6 +11,7 @@ import GetAvgRating from "../utils/avgRating";
 
 const Catalog = () => {
   const categoryname = useParams();
+  console.log(categoryname)   //{ catalogname: 'data-structure' }
   const [categoryPageData, setcategoryPageData] = useState(null);
   const [categoryId, setcategoryId] = useState("");
   const [active, setactive] = useState(1);
