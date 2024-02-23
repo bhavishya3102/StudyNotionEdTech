@@ -1,6 +1,10 @@
 const mongoose=require("mongoose");
 const mailSender = require("../utils/mailSender");
 const emailtemplate=require("../Mail/Templates/emailVerification");
+const getExpiryTime=require("../utils/getExpiryTime")
+
+// for using blackbox ai in vs code
+// how to create model in express?
 
 const Otpschema=new mongoose.Schema({
 email:{
@@ -14,7 +18,7 @@ otp:{
 createdate:{
     type:Date,
     default:Date.now(),
-    expires:5*60  // 5min me expire
+    expires:getExpiryTime
 }
 
    

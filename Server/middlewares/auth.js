@@ -6,6 +6,9 @@ exports.auth=async (req,resp,next)=>{
     try{
         // fetch the token from the req body
 
+        //, middleware functions are powerful tools that you can use to intercept 
+        //and manipulate requests and responses before they reach their final destination.
+
         /**Pass the Authorization header
          * Bearer   "token": 
          * "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJoYXZ
