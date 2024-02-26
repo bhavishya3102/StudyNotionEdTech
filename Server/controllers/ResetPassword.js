@@ -31,7 +31,8 @@ exports.resetPasswordtoken=async (req,resp)=>{
         resetPasswordExpires:Date.now()+5*60*1000 //5hrs
     },{new:true});
     // create the url -- frontend url that is use portno of frontend url
-    const url=`http://localhost:3000/update-password/${token}`;
+    // const url=`http://localhost:3000/update-password/${token}`;
+    const url=`https://study-notion-taupe-one.vercel.app/update-password/${token}`;
     // send the email containing the url
     await mailsender(email,"password resent link",
     `password resent link:${url}`);
