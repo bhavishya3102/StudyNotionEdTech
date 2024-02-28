@@ -44,7 +44,7 @@ app.use(
 app.use(
     fileupload({
         useTempFiles:true,
-        tempFileDir:"/tmp"
+        tempFileDir:"../public/temp"
     })
 )
 

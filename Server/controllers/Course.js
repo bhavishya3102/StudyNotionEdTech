@@ -6,6 +6,7 @@ const Section = require("../models/Section");
 const Subsection = require("../models/Subsection");
 const { convertSecondsToDuration } = require("../utils/secToDuration");
 const Courseprogress = require("../models/Courseprogress");
+const Category = require("../models/Category");
 require("dotenv").config();
 
 exports.createCourse=async (req,resp)=>{
@@ -428,6 +429,14 @@ exports.deleteCourse=async (req,resp)=>{
         }
 //  in course the value of category is object type it contains category id of course 
 // while deleting the course it delete the the object
+
+        await Category.findByIdAndUpdate(course.Category,{
+            $pull:{course:courseid}
+        })
+
+        await User.findByIdAndUpdate(course.instructor,{
+            $pull:{courses:courseid}
+        })
 
         // delete the course
         await Course.findByIdAndDelete(courseid);

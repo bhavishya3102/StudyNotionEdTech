@@ -15,6 +15,8 @@ const {dateofbirth="",gender,contactno,about="",firstname="",lastname=""}=req.bo
 // token and at the auth the decode token(details)  is passed in 
 // req.user so we fetch the decode data of user 
 const userid=req.user.id;
+
+
 console.log("update",req.user);
 // // validation
 // if(!contactno || !gender || !userid){
