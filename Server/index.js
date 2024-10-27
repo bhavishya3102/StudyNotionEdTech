@@ -1,6 +1,7 @@
 const express=require("express");
 const app=express();
 require("dotenv").config();
+
  
 const courseroute=require("./routes/Course");
 const paymentroute=require("./routes/Payment");
@@ -13,6 +14,8 @@ const {cloudinaryconnect}=require("./config/cloudinaryconnect");
 const cookieParser=require("cookie-parser");
 const cors=require("cors");
 const fileupload=require("express-fileupload");
+const { db } = require("./models/Course");
+const { connect } = require("mongoose");
 
 // database connect
 connectdb();
@@ -37,6 +40,7 @@ app.use(
  *  on the server before they are moved or processed further. When set to true, the 
  * uploaded files will be available on the req.files */
 
+
 /** tempFileDir:"/tmp" ----This option specifies the directory where the temporary files should be stored. 
  * In this case, it is set to "/tmp", which is a commonly used directory path for storing 
  * temporary files  */
@@ -47,13 +51,11 @@ app.use(
         tempFileDir:"../public/temp"
     })
 )
-
 //mounting
 app.use("/api/v1/course",courseroute);
 app.use("/api/v1/payment",paymentroute);
 app.use("/api/v1/profile",profileroute);
 app.use("/api/v1/user",userroute);
-
 // default route
 app.get("/",(req,resp)=>{
     return resp.json({

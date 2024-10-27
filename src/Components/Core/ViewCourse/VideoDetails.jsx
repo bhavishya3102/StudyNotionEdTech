@@ -187,9 +187,9 @@ completion of video if it is not present then show mark as completed button othe
 shown  */}
 
           {videoended && (
-            <div>
+            <div className="absolute top-100 left-50">
               {completedLectures && !completedLectures.includes(subsectionid) && (
-                <button  className="bg-yellow-25 px-4 py-2" onClick={() => handleLectureCompletion()}>
+                <button  className="bg-richblack-400 px-4 py-2 text-black font-bold absolute top-[20vh]" onClick={() => handleLectureCompletion()}>
                   Mark as Completed
                 </button>
               )}
@@ -198,8 +198,9 @@ the video we use seek(0) function of useref hook to start the video from start
 
 seek(0) means video ko dubara se 0 se start karna h
 */}
+<br></br>
               <button
-              className="bg-yellow-25 px-4 py-2"
+              className="bg-richblack-400 px-4 py-2 text-black font-bold relative  top-100 left-50 "
                 onClick={() => {
                   if (playerRef?.current) {
                     playerRef.current?.seek(0);
@@ -211,12 +212,12 @@ seek(0) means video ko dubara se 0 se start karna h
               </button>
 
               {/** prev and next button */}
-              <div>
+              <div className="relative inline ml-16">
                 {!isFirstVideo() && (
-                  <button  className="bg-yellow-25 px-4 py-2" onClick={goToPrevVideo}>Prev</button>
+                  <button  className="bg-richblack-400 px-6 py-4 text-black font-bold relative  top-60 left-50 " onClick={goToPrevVideo}>Prev</button>
                 )}
                 {!isLastVideo() && (
-                  <button  className="bg-yellow-25 px-4 py-2" onClick={goTONextVideo}>Next</button>
+                  <button  className="bg-richblack-400 px-6 py-4 text-black font-bold relative  top-70 left-50 " onClick={goTONextVideo}>Next</button>
                 )}
               </div>
             </div>
@@ -225,8 +226,8 @@ seek(0) means video ko dubara se 0 se start karna h
         </div>
       )}
 
-      <h1 className="text-white font-bold">{videodata?.title}</h1>
-      <p  className="text-white font-semibold">{videodata?.description}</p>
+      <h1 className="text-white font-bold   relative top-100 left-50 ">{videodata?.title}</h1>
+      <p  className="text-white font-semibold relative top-100 left-50 ">{videodata?.description}</p>
     </div>
   );
 };

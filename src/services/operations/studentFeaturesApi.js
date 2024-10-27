@@ -91,7 +91,7 @@ const options={
     };
     console.log("a")
 
-    // Show the razorpay payment window
+    // Show the razorpay payment windo0w
     const paymentObject=new window.Razorpay(options);
     paymentObject.open();
 

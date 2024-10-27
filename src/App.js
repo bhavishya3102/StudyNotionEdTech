@@ -33,7 +33,7 @@ function App() {
   console.log(user);
 
   return (
-<div className=" w-screen h-screen bg-richblack-900 flex flex-col font-inter">
+<div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
 <Navbar></Navbar>
 <Routes>
 <Route path="/" element={<Home />}></Route>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import logo from "../../assets/Logo/Logo-Full-Light.png";
+import logo from "../../assets/Logo/techlearn.png";
 import { NavbarLinks } from "../../data/navbar-links";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useSelector } from "react-redux";
