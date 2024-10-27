@@ -3,6 +3,7 @@ const otpgenerator=require("otp-generator");
 const OTP=require("../models/Otp");
 const bcrypt=require("bcryptjs")
 const jwt=require("jsonwebtoken");
+
 const Profile=require("../models/Profile");
 const mailsender=require("../utils/mailSender");
 const  passwordUpdated  = require("../Mail/Templates/passwordUpdate");
