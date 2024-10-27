@@ -27,7 +27,7 @@ const Footer = () => {
         <div className="flex flex-row w-[50%] gap-8 ">
           {/**1st part */}
           <div>
-            <img src={Logo} alt="error"></img>
+            <img src={Logo} alt="error" width={150} height={42}></img>
 
             <div>
 
