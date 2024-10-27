@@ -1,7 +1,7 @@
 const user=require("../models/User");
 const otpgenerator=require("otp-generator");
 const OTP=require("../models/Otp");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs")
 const jwt=require("jsonwebtoken");
 const Profile=require("../models/Profile");
 const mailsender=require("../utils/mailSender");
